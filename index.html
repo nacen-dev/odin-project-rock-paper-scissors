@@ -5,17 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin Project Rock Paper Scissors</title>
-    <script src="./index.js"></script>
+    <script src="./index.js" defer></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <header>
+    <header class="header">
       <h1>Rock Paper Scissors Game</h1>
+      <p>
+        Test your mettle and play a rock paper scissors game with a computer.
+      </p>
+      <p>First one to win 5 rounds wins the game</p>
     </header>
     <main>
       <section class="scores">
-        <div class="player-score"></div>
-        <div class="computer-score"></div>
+        <div class="player-score">Player's Score:</div>
+        <div class="computer-score">Computer's Score:</div>
+        <div class="winner"></div>
+      </section>
+      <section class="choice-display">
+        <div class="player-choice"></div>
+        <div class="computer-choice"></div>
+      </section>
+      <section class="choice-selection">
+        <button id="rock" class="button">Rock</button>
+        <button id="paper" class="button">Paper</button>
+        <button id="scissors" class="button">Scissors</button>
       </section>
     </main>
   </body>
