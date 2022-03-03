@@ -1,10 +1,111 @@
 html {
   box-sizing: border-box;
-  height: 100%;
 }
 
 *,
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 0.625rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+main {
+  padding: 0;
+}
+
+.scores {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.625rem 1.5rem;
+}
+
+.choice-image {
+  width: 64px;
+  height: 64px;
+  color: green;
+}
+
+.button {
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 10px 20px;
+  background-color: #fff;
+}
+
+.score {
+  font-size: 2rem;
+  flex: 1;
+  text-align: center;
+}
+
+.choice-display {
+  width: 100%;
+  display: flex;
+  padding: 0.625rem 1.5rem;
+}
+
+.player-choice,
+.computer-choice {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.player-choice h3,
+.computer-choice h3 {
+  font-size: 2rem;
+  text-align: center;
+  margin: 1rem;
+}
+
+.img-choice {
+  width: 100px;
+  height: 100px;
+}
+
+.choice-selection {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  display: flex;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+.choice-display {
+}
+
+.credits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+  color: #fff;
+  width: 100%;
+}
+
+.credits h3 {
+  margin: 10px 0 5px 0;
+}
+
+.attribution-list {
+  list-style: none;
+  margin: 15px 0;
 }
