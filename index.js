@@ -3,17 +3,33 @@ let scores = {
   computerScore: 0,
 };
 
-let playerScoreElement = document.querySelector(".player-score");
-let computerScoreElement = document.querySelector(".computer-score");
+const scoresElement = document.querySelectorAll(".score");
 const choiceButtons = document.querySelectorAll(".choice-button");
+const winnerText = document.querySelector(".winner-text");
+
+const checkScore = ({ playerScore, computerScore }) => {
+  if (playerScore === 5 || computerScore === 5) {
+    choiceButtons.forEach((button) => {
+      button.disabled = true;
+    });
+  }
+  if (playerScore === 5) {
+    winnerText.textContent = "You won the game";
+  } else if (computerScore === 5) {
+    winnerText.textContent = "You lost the game";
+  }
+};
+
+const addScoreToDisplay = ({ playerScore, computerScore }) => {
+  scoresElement[0].textContent = playerScore;
+  scoresElement[1].textContent = computerScore;
+};
 
 choiceButtons.forEach((choiceButton) => {
   choiceButton.addEventListener("click", (event) => {
-    console.log(event.currentTarget.id);
-    playRound(event.currentTarget.id, computerPlay);
-    console.log(scores);
-    playerScoreElement.textContent = scores.playerScore;
-    computerScoreElement.textContent = scores.computerScore;
+    playRound(event.currentTarget.id, computerPlay, scores);
+    addScoreToDisplay(scores);
+    checkScore(scores);
   });
 });
 
@@ -26,9 +42,8 @@ const computerPlay = () => {
   return choices[Math.floor(Math.random() * 3)];
 };
 
-const playRound = (playerChoice, computerSelection) => {
+const playRound = (playerChoice, computerSelection, scores) => {
   let computerChoice = computerSelection();
-  console.log("computer choice: ", computerChoice);
   if (playerChoice === "rock") {
     if (computerChoice === "paper") {
       scores.computerScore = scores.computerScore + 1;
