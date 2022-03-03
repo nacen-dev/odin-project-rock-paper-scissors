@@ -7,18 +7,7 @@ const scoresElement = document.querySelectorAll(".score");
 const choiceButtons = document.querySelectorAll(".choice-button");
 const winnerText = document.querySelector(".winner-text");
 const playAgain = document.querySelector(".play-again");
-
-playAgain.addEventListener("click", () => {
-  playAgain.hidden = true;
-  playAgain.disabled = true;
-  winnerText.textContent = "";
-  scores.playerScore = 0;
-  scores.computerScore = 0;
-  addScoreToDisplay(scores);
-  choiceButtons.forEach((button) => {
-    button.disabled = false;
-  });
-});
+const choiceDisplay = document.querySelectorAll(".img-choice");
 
 const checkScore = ({ playerScore, computerScore }) => {
   if (playerScore === 5 || computerScore === 5) {
@@ -40,14 +29,6 @@ const addScoreToDisplay = ({ playerScore, computerScore }) => {
   scoresElement[1].textContent = computerScore;
 };
 
-choiceButtons.forEach((choiceButton) => {
-  choiceButton.addEventListener("click", (event) => {
-    playRound(event.currentTarget.id, computerPlay, scores);
-    addScoreToDisplay(scores);
-    checkScore(scores);
-  });
-});
-
 const computerPlay = () => {
   let choices = {
     0: "rock",
@@ -57,8 +38,7 @@ const computerPlay = () => {
   return choices[Math.floor(Math.random() * 3)];
 };
 
-const playRound = (playerChoice, computerSelection, scores) => {
-  let computerChoice = computerSelection();
+const playRound = (playerChoice, computerChoice, scores) => {
   if (playerChoice === "rock") {
     if (computerChoice === "paper") {
       scores.computerScore = scores.computerScore + 1;
@@ -79,3 +59,33 @@ const playRound = (playerChoice, computerSelection, scores) => {
     }
   }
 };
+
+const setChoiceDisplay = (playerChoice, computerChoice) => {
+  choiceDisplay[0].src = `./assets/${playerChoice}-svgrepo-com.svg`;
+  choiceDisplay[0].hidden = false;
+  choiceDisplay[1].src = `./assets/${computerChoice}-svgrepo-com.svg`;
+  choiceDisplay[1].hidden = false;
+};
+
+playAgain.addEventListener("click", () => {
+  playAgain.hidden = true;
+  playAgain.disabled = true;
+  winnerText.textContent = "";
+  scores.playerScore = 0;
+  scores.computerScore = 0;
+  addScoreToDisplay(scores);
+  choiceButtons.forEach((button) => {
+    button.disabled = false;
+  });
+});
+
+choiceButtons.forEach((choiceButton) => {
+  choiceButton.addEventListener("click", (event) => {
+    const playerChoice = event.currentTarget.id;
+    const computerChoice = computerPlay();
+    setChoiceDisplay(playerChoice, computerChoice);
+    playRound(playerChoice, computerChoice, scores);
+    addScoreToDisplay(scores);
+    checkScore(scores);
+  });
+});
