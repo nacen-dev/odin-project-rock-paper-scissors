@@ -6,12 +6,27 @@ let scores = {
 const scoresElement = document.querySelectorAll(".score");
 const choiceButtons = document.querySelectorAll(".choice-button");
 const winnerText = document.querySelector(".winner-text");
+const playAgain = document.querySelector(".play-again");
+
+playAgain.addEventListener("click", () => {
+  playAgain.hidden = true;
+  playAgain.disabled = true;
+  winnerText.textContent = "";
+  scores.playerScore = 0;
+  scores.computerScore = 0;
+  addScoreToDisplay(scores);
+  choiceButtons.forEach((button) => {
+    button.disabled = false;
+  });
+});
 
 const checkScore = ({ playerScore, computerScore }) => {
   if (playerScore === 5 || computerScore === 5) {
     choiceButtons.forEach((button) => {
       button.disabled = true;
     });
+    playAgain.hidden = false;
+    playAgain.disabled = false;
   }
   if (playerScore === 5) {
     winnerText.textContent = "You won the game";
